@@ -29,6 +29,6 @@ module "vpc" {
 }
 
 
-#module "rds" {
-#  source = "./RDS"
-#}
+module "rds" {
+  source = "./RDS"
+}
