@@ -11,3 +11,5 @@ crash.*.log
 
 # lock de terra
 .terraform.lock
+
+/.private/
