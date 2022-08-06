@@ -13,22 +13,6 @@ provider "aws" {
   profile    = var.profile
 }
 
-
-
-module "ec2" {
-  source = "./EC2"
-}
-
-
-module "vpc" {
-  source = "./VPC"
-  marca = var.marca
-  environment = var.environment
-  cidrblock = var.cidrblock
-  tags = local.tags
-}
-
-
-module "rds" {
-  source = "./RDS"
+module "virtual_net" {
+  source = "./modules/aws_vpc"
 }

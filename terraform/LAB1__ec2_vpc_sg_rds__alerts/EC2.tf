@@ -5,5 +5,9 @@ resource "aws_instance" "project-iac" {
   key_name              = "EC2 - Amazon Linux"
   #vpc_security_group_ids       = ["${aws_security_group.publicsgr.id}"]
   #subnet_id             = "${aws_subnet.subnets.id}"
- 
+  
+   tags = {
+    Terraform = "true"
+    Environment = "dev"
+  }
   }
