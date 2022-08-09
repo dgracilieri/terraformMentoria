@@ -1,4 +1,11 @@
 #------------------------
+# MAIN
+#------------------------
+
+is_production = false
+
+
+#------------------------
 # PROVIDERS
 #------------------------
 
@@ -210,7 +217,8 @@ aws_private_route_table_zb_name = "acme-rt-pri-zb"
     root_block_device_size        = 8
     root_block_device_volume_type = "gp2"
 
-    tag_private_name  = "acme-ec2-pro-pub-wp-01"
+    tag_private_name  = "acme-ec2-pro-pub-01"
+    tag_Name          = "acme-ec2-pro-pub-01"
     tag_public_name   = "www"
     tag_app           = "linux"
     tag_app_id        = "linux-01"

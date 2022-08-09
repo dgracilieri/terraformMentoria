@@ -70,6 +70,7 @@ resource "aws_instance" "default" {
   tags = merge(
     var.instance_tags,
     {
+      "Name"        = var.tag_Name,
       "private_name" = var.tag_private_name,
       "public_name"  =  var.tag_public_name,
       "environment"  =  var.tags_environment,

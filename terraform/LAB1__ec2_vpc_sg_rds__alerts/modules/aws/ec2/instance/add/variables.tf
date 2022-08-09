@@ -148,6 +148,10 @@ variable "ephemeral_block_device" {
   default     = []
 }
 
+variable "tag_Name" {
+  description = "(name."
+}
+
 variable "register_dns_private" {
   description = "(Optional) Register in private DNS using tag_private_name and private IP"
   type = bool

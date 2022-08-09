@@ -40,6 +40,7 @@
     associate_public_ip_address = var.aws_ec2_pro_pub_01["associate_public_ip_address"]
     instance_tags     = {}
     tag_private_name  = var.aws_ec2_pro_pub_01["tag_private_name"]
+    tag_Name          = var.aws_ec2_pro_pub_01["tag_Name"]
     tag_public_name   = var.aws_ec2_pro_pub_01["tag_public_name"]
     tag_app           = var.aws_ec2_pro_pub_01["tag_app"]
     tag_app_id        = var.aws_ec2_pro_pub_01["tag_app_id"]
@@ -55,9 +56,6 @@
     }
 
     volume_tags       = {
-      Name = var.aws_ec2_pro_pub_01["name"]
+      name = var.aws_ec2_pro_pub_01["name"]
     }
-
-    #ignore_changes = ["ami"]
-
   }
