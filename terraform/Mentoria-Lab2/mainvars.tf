@@ -43,7 +43,7 @@ variable "cidrblock" {
   default = "192.168.0.0/16"
 }
 
-#esta variable account id solo se usa en la politica de KMS
+/* #esta variable account id solo se usa en la politica de KMS
 variable "database_master_password"{
   type = string
   description = "Escriba la contraseña para la instancia RDS"
@@ -51,7 +51,7 @@ variable "database_master_password"{
     condition = length(var.database_master_password) > 5
     error_message = "la contraseña para el RDS debe ser mayor a 5 caracteres."
   }
-}
+} */
 
 locals{ 
   tags = {
@@ -66,4 +66,9 @@ locals{
 #esta variable account id solo se usa en la politica de KMS
 variable "accountid" {
   default = "756915900426"
+}
+
+#esta variable s3_origin_id es nombre que le definimos al Origin name en Cloudfront
+variable "s3_origin_id" {
+  default = "s3-cloudops-bucket-webapp.carancas.com"
 }

@@ -1,4 +1,4 @@
-#Instancia bastion para el ambiente
+/* #Instancia bastion para el ambiente
 
 resource "aws_instance" "ec2bastion" {
   depends_on            = [module.VPCouts.publicsgrid, module.VPCouts.subnetsid]
@@ -22,4 +22,4 @@ resource "aws_instance" "ec2bastion" {
 
   tags = merge({Name = join("-",tolist(["bastion", var.marca, var.environment]))},local.tags)
   }
-  
+   */

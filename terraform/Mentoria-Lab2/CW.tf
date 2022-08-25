@@ -1,4 +1,4 @@
-resource "aws_cloudwatch_dashboard" "EC2_Dashboard" {
+/* resource "aws_cloudwatch_dashboard" "EC2_Dashboard" {
   dashboard_name = "EC2-Dashboard"
 
   dashboard_body = <<EOF
@@ -63,4 +63,4 @@ module "metric_alarm" {
     }
 
   alarm_actions = ["arn:aws:sns:us-east-1:756915900426:Default_CloudWatch_Alarms_Topic"]
-}
+} */

@@ -1,4 +1,4 @@
-resource "aws_db_instance" "mysql" {
+/* resource "aws_db_instance" "mysql" {
   allocated_storage       = 20
   auto_minor_version_upgrade  = true
   backup_retention_period = 7
@@ -26,3 +26,4 @@ resource "aws_db_subnet_group" "rdssubgrp" {
   subnet_ids = [module.VPCouts.subnetsid[0], module.VPCouts.subnetsid[1]]
   tags = merge({Name = join("-",tolist(["Subgrp", "RDS", var.marca, var.environment]))},local.tags)
 }
+ */
