@@ -1,0 +1,40 @@
+--- Pre-requisitos para el funcionamiento ---
+	- Creación de Bucket
+	- Importación de Script
+	- creación de Rol de AWS
+		- Crear rol
+		- Entidad de confianza > Servicio de AWS 
+		- Caso de uso > EC2
+		- Políticas de permisos > S3 ReadOnly
+		- Nombre del rol > ROLE__S3_ReadOnly_ON_EC2
+	- En la Instancia EC2 
+		- Instalamos el awscli (esto se instala en el UserData)
+		- Asignar el rol al EC2 (esto se realiza en la creación de la instancia)
+
+
+--- Script S3 ---
+
+#!/bin/bash
+sudo apt update
+sudo apt install apache2 -y
+sudo systemctl start apache2
+sudo systemctl enable apache2
+
+sudo chown www-data:www-data /var/www/html/index.html
+sudo chmod 646 /var/www/html/index.html
+sudo cat /etc/hostname > /var/www/html/index.html
+sudo systemctl start apache2
+
+
+
+--- Script User Data ---
+	- la exportación de credenciales para traer data de un S3 o asignar un rol de S3
+	- Instalación de awscli
+
+#!/bin/bash
+sudo apt update
+sudo apt install awscli
+aws s3 cp s3://bucket_scripts_files/script_ubuntu.sh .
+sudo chmod +x script_ubuntu.sh
+sudo sh script_ubuntu.sh
+sudo sleep 20; rm script_ubuntu.sh

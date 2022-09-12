@@ -14,3 +14,8 @@ provider "aws" {
   shared_credentials_file = var.CRTfile
   profile    = var.profile
 }
+
+resource "random_id" "id" {
+  byte_length = 8
+}
+

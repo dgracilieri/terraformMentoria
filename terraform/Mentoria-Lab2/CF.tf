@@ -4,7 +4,7 @@ resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
 }
 
 resource "aws_cloudfront_distribution" "s3_distribution" {
-  depends_on            = [aws_s3_bucket.c2bucket, aws_s3_bucket.c2bucketlog]
+  depends_on            = [aws_s3_bucket.c2bucket, aws_s3_bucket.c2bucketlog, aws_wafv2_web_acl.waf_sql_inject]
   origin {
     domain_name = aws_s3_bucket.c2bucket.bucket_regional_domain_name
     origin_id   = var.s3_origin_id
@@ -103,6 +103,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   }
 
   tags = merge({Name = join("-",tolist(["CloudFront", var.marca, var.environment]))},local.tags)
+  web_acl_id = aws_wafv2_web_acl.waf_sql_inject.arn
 
   viewer_certificate {
     cloudfront_default_certificate = true

@@ -1,7 +1,7 @@
 # Creación de bucket para los logs del sitio web estatico
 resource "aws_s3_bucket" "c2bucketlog" {
   bucket = "s3-cloudops-bucket-webapp.carancas.com.logs"
-  acl    = "private"
+  acl    = "log-delivery-write"
   force_destroy = true
  
   versioning {
@@ -11,7 +11,6 @@ resource "aws_s3_bucket" "c2bucketlog" {
   tags = merge({Name = join("-",tolist(["S3bucketlog", var.marca, var.environment]))},local.tags)
 
 }
-
 
 # Creación de bucket para el sitio web estatico
 resource "aws_s3_bucket" "c2bucket" {
@@ -25,6 +24,11 @@ resource "aws_s3_bucket" "c2bucket" {
   website {
     index_document = "index.html"
     error_document = "error.html"
+  }
+
+  logging {
+    target_bucket = aws_s3_bucket.c2bucketlog.id
+    target_prefix = "logs/"
   }
 
   tags = merge({Name = join("-",tolist(["S3bucket", var.marca, var.environment]))},local.tags)
@@ -56,6 +60,32 @@ resource "aws_s3_bucket_object" "images" {
 
 
 
+
+# Creación de bucket para scripts
+resource "aws_s3_bucket" "c2bucket_files" {
+  bucket = "s3-cloudops-bucket-webapp.carancas.com-files"
+  acl    = "private"
+ 
+  versioning {
+    enabled = false
+  }
+
+  tags = merge({Name = join("-",tolist(["S3bucket-Files", var.marca, var.environment]))},local.tags)
+
+}
+
+#Sube archivos de tu sitio web estático
+resource "aws_s3_bucket_object" "script" {
+  for_each = fileset("./website-content/", "**/*.sh")
+
+  bucket = aws_s3_bucket.c2bucket_files.bucket
+  key    = each.value
+  source = "./website-content/${each.value}"
+  etag   = filemd5("./website-content/${each.value}")
+}
+
+
+# --------------------------------------------------------------------------
 # Agregue más aws_s3_bucket_object para el tipo de archivos que desea cargar
 # La razón para tener múltiples aws_s3_bucket_object con tipo de archivo es asegurarse
 # agregamos el tipo de contenido correcto para el archivo en S3. 

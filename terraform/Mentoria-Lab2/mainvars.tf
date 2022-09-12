@@ -1,13 +1,3 @@
-# Esta plantilla de terraform despliega un ambiente en AWS
-# El despliegue usa el modulo para separar los recursos de la VPC.
-
-#Entre los componentes desplegados se encuentran:
-# una VPC
-# 2 subnets publicas para bastion y RDS
-# bastion para el ambiente
-# Base de datos RDS
-
-
 //Ingresar la region sobre la cual se va a trabajar
 variable "aws_region" {
   default = "us-east-1"
@@ -22,6 +12,7 @@ variable "CRTfile" {
 variable "profile" {
   default =  "personal" 
 }
+
 
 //Ingresar la marca propietaria del proyecto
 //Use inicial en mayúscula
@@ -42,16 +33,6 @@ variable "responsable" {
 variable "cidrblock" {
   default = "192.168.0.0/16"
 }
-
-/* #esta variable account id solo se usa en la politica de KMS
-variable "database_master_password"{
-  type = string
-  description = "Escriba la contraseña para la instancia RDS"
-  validation{
-    condition = length(var.database_master_password) > 5
-    error_message = "la contraseña para el RDS debe ser mayor a 5 caracteres."
-  }
-} */
 
 locals{ 
   tags = {
